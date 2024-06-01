@@ -44,7 +44,6 @@ const getOverview = async () => {
                 botonLista.innerHTML = 'READ MORE! >';
                 botonLista.classList.add('botonLista');
                 botonLista.setAttribute('id', elemento.list_name_encoded);
-                console.log(botonLista)
                 containerLista.append(tituloLista, barra, oldest, newest, actualizado, botonLista);
                 fragment.append(containerLista)
             });
@@ -62,12 +61,17 @@ getOverview()
     .catch((error) => { console.error(error) })
 
 
-const getSpecifiedList = async () => {
+const getSpecifiedList = async (id) => {
     const url = 'https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=fIJzQt26lm7XPd0UdB5iJlFzxefOembt';
     try {
         const respuesta = await fetch(url);
         if (respuesta.ok) {
             divLista.innerHTML = '';
+            const botonVolver = document.createElement('button');
+            botonVolver.innerHTML = 'Back to Index';
+            botonVolver.setAttribute('href', getOverview());
+            botonVolver.classList.add('botonVolver');
+            document.header.append(botonVolver);
             const data = await respuesta.json();
             const listaLibros = data.results.lists;
             listaLibros.forEach((elemento) => {
@@ -84,10 +88,11 @@ const getSpecifiedList = async () => {
                         weeksOnList.innerHTML = `Weeks on list: ${libro.weeks_on_list}`;
                         const descripcion = document.createElement('p');
                         descripcion.innerHTML = libro.description;
-                        const botonBuy = document.createElement('button');
-                        botonBuy.innerHTML = libro.amazon_product_url;
-                        botonBuy.classList.add('botonAmazon');
-                        containerLista.append(tituloLibro, imagenLibro, weeksOnList, descripcion, botonBuy);
+                        const botonAmazon = document.createElement('button');
+                        botonAmazon.innerHTML = 'Buy at Amazon';
+                        botonAmazon.setAttribute('href', libro.amazon_product_url);
+                        botonAmazon.classList.add('botonAmazon');
+                        containerLista.append(tituloLibro, imagenLibro, weeksOnList, descripcion, botonAmazon);
                         fragment.append(containerLista);
                     })
                 }
@@ -101,6 +106,6 @@ const getSpecifiedList = async () => {
     }
 };
 
-getSpecifiedList()
+getSpecifiedList(id)
     .then((respuesta) => { console.log(respuesta) })
     .catch((error) => { console.error(error) })
