@@ -1,11 +1,11 @@
 //variables
 const divLista = document.querySelector('#lista');
 const fragment = document.createDocumentFragment();
-const loader = document.getElementById('centrado');
+const loader = document.getElementById('loader');
 const hidden = document.querySelector('.hidden');
-let containerLista;
-let tituloLista;
-let botonLista;
+const header = document.getElementById('header');
+let botonVolver;
+
 //eventos
 window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
@@ -17,11 +17,20 @@ window.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('click', async (evento) => {
     if (evento.target.matches('.botonLista')) {
         const id = evento.target.getAttribute('id');
+        limpiar(divLista);
         await getSpecifiedList(id);
+    }
+    if (evento.target.matches('.botonVolver')){
+        limpiar(divLista);
+        botonVolver.remove();
+        await getOverview();
     }
 });
 
 //funciones
+const limpiar = (elemento)=> {
+    elemento.innerHTML = '';
+}
 const getOverview = async () => {
     const url = 'https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=fIJzQt26lm7XPd0UdB5iJlFzxefOembt';
     try {
@@ -30,8 +39,8 @@ const getOverview = async () => {
             const data = await respuesta.json();
             const listas = data.results;
             listas.forEach((elemento) => {
-                containerLista = document.createElement('article');
-                tituloLista = document.createElement('h2');
+                const containerLista = document.createElement('article');
+                const tituloLista = document.createElement('h2');
                 tituloLista.innerHTML = elemento.display_name;
                 const barra = document.createElement('hr');
                 const oldest = document.createElement('p');
@@ -66,18 +75,12 @@ const getSpecifiedList = async (id) => {
     try {
         const respuesta = await fetch(url);
         if (respuesta.ok) {
-            divLista.innerHTML = '';
-            const botonVolver = document.createElement('button');
-            botonVolver.innerHTML = 'Back to Index';
-            botonVolver.setAttribute('href', getOverview());
-            botonVolver.classList.add('botonVolver');
-            document.header.append(botonVolver);
             const data = await respuesta.json();
             const listaLibros = data.results.lists;
             listaLibros.forEach((elemento) => {
                 if (elemento.list_name_encoded == id) {
                     elemento.books.forEach((libro) => {
-                        containerLista = document.createElement('article');
+                        const containerLista = document.createElement('article');
                         const ranking = libro.rank;
                         const tituloLibro = document.createElement('h3');
                         tituloLibro.innerHTML = `#${libro.rank} ${libro.title}`;
@@ -85,19 +88,27 @@ const getSpecifiedList = async (id) => {
                         imagenLibro.src = libro.book_image;
                         imagenLibro.alt = libro.title;
                         const weeksOnList = document.createElement('p');
-                        weeksOnList.innerHTML = `Weeks on list: ${libro.weeks_on_list}`;
+                        weeksOnList.innerHTML = `<i>Weeks on list: ${libro.weeks_on_list}</i>`;
+                        const br = document.createElement('br');
                         const descripcion = document.createElement('p');
-                        descripcion.innerHTML = libro.description;
+                        descripcion.innerHTML = `${libro.description}<br>`;
                         const botonAmazon = document.createElement('button');
-                        botonAmazon.innerHTML = 'Buy at Amazon';
+                        botonAmazon.innerHTML = 'BUY AT AMAZON';
                         botonAmazon.setAttribute('href', libro.amazon_product_url);
+                        botonAmazon.setAttribute('target', '_blank');
                         botonAmazon.classList.add('botonAmazon');
-                        containerLista.append(tituloLibro, imagenLibro, weeksOnList, descripcion, botonAmazon);
+                        containerLista.append(tituloLibro, imagenLibro, weeksOnList, br, descripcion, botonAmazon);
                         fragment.append(containerLista);
                     })
                 }
             });
+            const barra = document.createElement('hr');
+            botonVolver = document.createElement('button');
+            botonVolver.innerHTML = '< Back to Index';
+            botonVolver.classList.add('botonVolver');
+            header.append(barra, botonVolver);
             divLista.append(fragment);
+            
         } else {
             throw 'Ha habido un problema.';
         }
@@ -109,3 +120,6 @@ const getSpecifiedList = async (id) => {
 getSpecifiedList(id)
     .then((respuesta) => { console.log(respuesta) })
     .catch((error) => { console.error(error) })
+
+
+
