@@ -6,6 +6,7 @@ const hidden = document.querySelector('.hidden');
 const header = document.getElementById('header');
 let botonVolver;
 
+
 //eventos
 window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
@@ -18,6 +19,7 @@ document.addEventListener('click', async (evento) => {
     if (evento.target.matches('.botonLista')) {
         const id = evento.target.getAttribute('id');
         limpiar(divLista);
+        //limpiar barra hr???
         await getSpecifiedList(id);
     }
     if (evento.target.matches('.botonVolver')){
@@ -79,6 +81,8 @@ const getSpecifiedList = async (id) => {
             const listaLibros = data.results.lists;
             listaLibros.forEach((elemento) => {
                 if (elemento.list_name_encoded == id) {
+                    // const subtitulo = document.createElement('h2'); donde va el subtitulo???
+                    // subtitulo.innerHTML = elemento.display_name;
                     elemento.books.forEach((libro) => {
                         const containerLista = document.createElement('article');
                         const ranking = libro.rank;
