@@ -1,19 +1,17 @@
 //variables
+const seccion = document.querySelector('#seccion');
 const divLista = document.querySelector('#lista');
 const fragment = document.createDocumentFragment();
 const loader = document.getElementById('loader');
 const hidden = document.querySelector('.hidden');
 const header = document.getElementById('header');
+const divFiltrar = document.querySelector('#filter');
+const filterInput = document.querySelector('#filterInput');
+const filterButton = document.querySelector('#filterButton');
 let botonVolver;
 
-
-//eventos
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        hidden.classList.remove('hidden');
-        loader.remove();
-    }, 1000);
-});
+//funciones
+window.onload = () => loader.remove();
 
 document.addEventListener('click', async (evento) => {
     if (evento.target.matches('.botonLista')) {
@@ -22,19 +20,39 @@ document.addEventListener('click', async (evento) => {
         //limpiar barra hr???
         await getSpecifiedList(id);
     }
-    if (evento.target.matches('.botonVolver')){
+    if (evento.target.matches('.botonVolver')) {
+
         limpiar(divLista);
         botonVolver.remove();
         await getOverview();
     }
 });
 
-//funciones
-const limpiar = (elemento)=> {
+
+seccion.addEventListener('click', (evento) => {
+    if (evento.target.tagName === 'button') {
+        const category = evento.target.value;
+        llamadaBestSellers(category)
+    }
+});
+
+filterButton.addEventListener('click', () => {
+    const filterValue = filterInput.value.toLowerCase();
+    const filteredListas = listasGlobal.filter(lista =>
+        lista.list_name.toLowerCase().includes(filterValue)
+    );
+    paintFirstPage(filteredListas);
+});
+
+
+
+
+const limpiar = (elemento) => {
     elemento.innerHTML = '';
 }
 const getOverview = async () => {
     const url = 'https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=fIJzQt26lm7XPd0UdB5iJlFzxefOembt';
+    document.getElementById('title').innerHTML = 'Todas las categorías';
     try {
         const respuesta = await fetch(url);
         if (respuesta.ok) {
@@ -68,8 +86,8 @@ const getOverview = async () => {
     }
 };
 getOverview()
-    .then((respuesta) => { console.log(respuesta) })
-    .catch((error) => { console.error(error) })
+    .then(respuesta => console.log(respuesta))
+    .catch(error => console.error(error))
 
 
 const getSpecifiedList = async (id) => {
@@ -81,8 +99,7 @@ const getSpecifiedList = async (id) => {
             const listaLibros = data.results.lists;
             listaLibros.forEach((elemento) => {
                 if (elemento.list_name_encoded == id) {
-                    // const subtitulo = document.createElement('h2'); donde va el subtitulo???
-                    // subtitulo.innerHTML = elemento.display_name;
+                    document.getElementById('title').innerHTML = elemento.display_name;
                     elemento.books.forEach((libro) => {
                         const containerLista = document.createElement('article');
                         const ranking = libro.rank;
@@ -96,7 +113,7 @@ const getSpecifiedList = async (id) => {
                         const br = document.createElement('br');
                         const descripcion = document.createElement('p');
                         descripcion.innerHTML = `${libro.description}<br>`;
-                        const botonAmazon = document.createElement('button');
+                        const botonAmazon = document.createElement('a');
                         botonAmazon.innerHTML = 'BUY AT AMAZON';
                         botonAmazon.setAttribute('href', libro.amazon_product_url);
                         botonAmazon.setAttribute('target', '_blank');
@@ -106,13 +123,13 @@ const getSpecifiedList = async (id) => {
                     })
                 }
             });
-            const barra = document.createElement('hr');
+            //const barra = document.createElement('hr');
             botonVolver = document.createElement('button');
             botonVolver.innerHTML = '< Back to Index';
             botonVolver.classList.add('botonVolver');
-            header.append(barra, botonVolver);
+            header.append(botonVolver);
             divLista.append(fragment);
-            
+
         } else {
             throw 'Ha habido un problema.';
         }
@@ -122,8 +139,8 @@ const getSpecifiedList = async (id) => {
 };
 
 getSpecifiedList(id)
-    .then((respuesta) => { console.log(respuesta) })
-    .catch((error) => { console.error(error) })
+    .then(respuesta => console.log(respuesta))
+    .catch(error => console.error(error))
 
 
 
