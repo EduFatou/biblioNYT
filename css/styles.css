@@ -97,7 +97,11 @@ header hr {
 
 }
 
-#lista {
+#title {
+    color: #4c4c4c;;
+}
+
+#divList {
     color: #4c4c4c;
     font-size: 80%;
     display: grid;
@@ -125,11 +129,10 @@ hr {
     border: 1px solid #ddd;
 }
 
-.botonLista {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    padding: 10px;
+.listButton {
+    width: 40%;
+    margin: 10px;
+    padding: 8px;
     border: 1px solid #ddd;
     background-color: transparent;
     border-radius: 4px;
@@ -149,7 +152,7 @@ hr {
     cursor: pointer;
 }
 
-.botonVolver {
+.backButton {
     display: flex;
     margin: 10px;
     padding: 6px;
@@ -162,3 +165,6 @@ hr {
 }
 
 
+.filter {
+    display: block;
+}
