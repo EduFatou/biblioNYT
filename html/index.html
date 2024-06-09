@@ -25,15 +25,15 @@
     <header id="header">
         <h3>New York Times<sub>®</sub></h3>
         <h1>Best Sellers</h1>
-        <div id="filter-container">
-            <input list="datalist" id="filterInput">
-            <datalist id="datalist">
-                
+        <button id="backButton">Back to Index</button>
+        <div id="filter-container" class="filter-container">
+            <input list="datalist" id="filterCategoriesInput">
+            <datalist id="datalist">    
             </datalist>
 
             <button id="filterButton">Search by category</button>
-            <button id="sortByAZ">Sort by A-Z</button>
-            <button id="sortByZA">Sort by Z-A</button>
+            <button id="sortByAZ">Sort from A to Z</button>
+            <button id="sortByZA">Sort from Z to A</button>
 
             <label for="showOnly">Show:</label>
             <select id="showOnly">
@@ -41,6 +41,32 @@
                 <option id="showByWeek" value="WEEKLY">Updated by week</option>
                 <option id="showByMonth" value="MONTHLY">Updated by month</option>
             </select>
+
+            <label for="oldest">Sort by oldest published date:</label>
+            <select id="oldest">
+                <option value="everything">Everything</option>
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+
+            <label for="newest">Sort by newest published date:</label>
+            <select id="newest">
+                <option value="everything">Everything</option>
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+        </div>
+        <div id="filterBooks-container" class="filterBooks-container">
+            <input list="datalist2" id="filterBooksInput">
+            <datalist id="datalist2">    
+            </datalist>
+            <button id="filterBooksButton">Search</button>
+
+            <button id="sortBooksByAZ">Sort from A to Z</button>
+            <button id="sortBooksByZA">Sort from Z to A</button>
+
+            <label for="show5">Show five books per page</label>
+            <input type="checkbox" id="show5">
         </div>
     </header>
     <main id="main">

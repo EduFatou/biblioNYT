@@ -74,31 +74,23 @@ body {
 
 header {
     margin: 20px 0 30px 0;
-    display: block;
-    font-size: 100%;
-    height: 100%;
-    width: 100%;
+    font-size: 150%;
 }
 
 header h1{
     background-color: black;
     color: white;
-    width: 50%;
+    width: 300px;
     text-align: right;
-    line-height: 70%;
+    line-height: 65%;
 }
 
 header h2 {
     color: black;
 }
 
-header hr {
-    margin: 20px;
-
-}
-
 #title {
-    color: #4c4c4c;;
+    color: #4c4c4c;
 }
 
 #divList {
@@ -107,16 +99,29 @@ header hr {
     display: grid;
     gap: auto;
     grid-auto-rows: auto;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     height: auto;
 }
 
 article {
+    display: block;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 1px 2px 6px #00000017;
+}
+
+article h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+article p {
+    display: flex;
+    margin: 10px;
 }
 
 article img {
@@ -130,9 +135,8 @@ hr {
 }
 
 .listButton {
-    width: 40%;
     margin: 10px;
-    padding: 8px;
+    padding: 6px;
     border: 1px solid #ddd;
     background-color: transparent;
     border-radius: 4px;
@@ -142,7 +146,8 @@ hr {
 
 .botonAmazon {
     display: flex;
-    margin-top: 3%;
+    text-decoration: none;
+    margin: 10px;
     padding: 6px;
     border: 1px solid #ddd;
     color: white;
@@ -152,7 +157,7 @@ hr {
     cursor: pointer;
 }
 
-.backButton {
+#backButton {
     display: flex;
     margin: 10px;
     padding: 6px;
@@ -164,7 +169,108 @@ hr {
     cursor: pointer;
 }
 
+.filter-container input {
+    margin: 10px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
 
-.filter {
-    display: block;
+.filter-container label {
+    margin: 10px;
+    font-size: 80%;
+}
+
+.filter-container select{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 200px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filter-container button {
+    display: flex;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:  #4c4c4c;
+    color: white;
+    cursor: pointer;
+}
+
+.filter-container button:hover {
+    background-color:  #2a2a2a;
+}
+
+.filterBooks-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    padding: 10px;
+}
+
+.filterBooks-container label {
+    margin: 10px;
+    font-size: 80%;
+}
+
+.filterBooks-container select{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filterBooks-container button {
+    display: flex;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:  #4c4c4c;
+    color: white;
+    cursor: pointer;
+}
+
+.filterBooks-container button:hover {
+    background-color:  #2a2a2a;
+}
+
+#next {
+    display: flex;
+    margin: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:  #4c4c4c;
+    color: white;
+    cursor: pointer;
+}
+
+#next:hover {
+    background-color:  #2a2a2a;
+}
+
+#previous {
+    display: flex;
+    margin: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:  #4c4c4c;
+    color: white;
+    cursor: pointer;
+}
+
+#previous:hover {
+    background-color:  #2a2a2a;
 }
