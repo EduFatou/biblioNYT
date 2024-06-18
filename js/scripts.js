@@ -27,9 +27,9 @@ let booklist = [];
 let listName = '';
 let arrayCategoriesSuggestions = [];
 let arrayBookSuggestions = [];
+//páginación
 let currentPage = 0;
 let pages = [];
-//botones de páginación
 const nextButton = document.createElement('button');
 const previousButton = document.createElement('button');
 nextButton.innerHTML = 'Next page';
@@ -127,6 +127,14 @@ newest.addEventListener('change', (evento) => {
         getCategories();
 });
 
+//enter keypress for filter button
+filterCategoriesInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        searchByCategory();
+    }
+});
+
 
 //---------------------Booklists events---------------------------------
 
@@ -174,6 +182,14 @@ previousButton.addEventListener('click', () => {
     }
 });
 
+
+// enter keypress for filterbutton
+filterBooksInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        searchBooks();
+    }
+});
 
 //*********************filter functions************************************************************************
 
