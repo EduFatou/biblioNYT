@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto-light', sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+}
+
+/*--------------------------------loader------------------------------------*/
+
+#loader {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.lds-ring {
+    color: #1c4c5b
+}
+
+.lds-ring,
+.lds-ring div {
+    box-sizing: border-box;
+}
+
+.lds-ring {
+    display: flex;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid currentColor;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: currentColor transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* ---------------------loader------------------------- */
+
+header {
+    margin: 20px 0 30px 0;
+    font-size: 160%;
+}
+
+header h1 {
+    background-color: black;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+    width: 300px;
+    text-align: right;
+    line-height: 66%;
+    margin-bottom: 5px;
+}
+
+header h3 {
+    font-size: 0.8em;
+}
+
+#backButton {
+    padding: 6px;
+    border: 1px solid #ddd;
+    color: white;
+    background-color: rgb(255, 35, 35);
+    border-radius: 4px;
+    box-shadow: 2px 4px 8px #00000017;
+    cursor: pointer;
+    display: block;
+}
+
+.filter-container, .filterBooks-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.filter-container input, .filterBooks-container input,
+.filter-container select, .filterBooks-container select,
+.filter-container button, .filterBooks-container button {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filterBooks-container button:hover, .filter-container button:hover {
+    color: #ddd;
+    background-color:  #2a2a2a;
+}
+
+label {
+    align-content:center;
+    text-align: right;
+    font-size: 60%;
+}
+
+#title {
+    color: #4c4c4c;
+}
+
+#divList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #4c4c4c;
+    font-size: 80%;
+    gap: 10px;
+    padding: 10px;
+}
+
+article {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 1px 2px 6px #00000017;
+    width: 90%;
+    max-width: 300px;
+}
+
+article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+article h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 8px;
+}
+
+article p {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 10px;
+}
+
+hr {
+    border: 1px solid #ddd;
+}
+
+.listButton, .botonAmazon {
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 1px 2px 8px #00000017;
+    cursor: pointer;
+    display: block;
+    width: 50%;
+    text-align: center;
+}
+
+.botonAmazon {
+    color: white;
+    background-color: rgb(255, 171, 35);
+}
+
+#next, #previous {
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4c4c4c;
+    color: white;
+    cursor: pointer;
+    display: block;
+    width: 80%;
+}
+
+#next:hover, #previous:hover {
+    color: #ddd;
+    background-color:  #2a2a2a;
+}
+
+@media (max-width: 767px) {
+    #divList {
+        color: #4c4c4c;
+        font-size: 80%;
+        display: grid;
+        gap: auto;
+        grid-auto-rows: auto;
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        height: auto;
+    }
+    .filter-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    .listButton, .botonAmazon, #next, #previous, #backButton {
+        width: auto;
+    }
+}
+
+
+@media (min-width: 768px) {
+
+    header h1 {
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    .filter-container, .filterBooks-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .filter-container input, .filterBooks-container input,
+    .filter-container select, .filterBooks-container select,
+    .filter-container button, .filterBooks-container button {
+        width: auto;
+        margin: 5px;
+    }
+
+    #divList {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    article {
+        width: calc(33.333% - 20px);
+    }
+
+    .listButton, .botonAmazon, #next, #previous, #backButton {
+        width: auto;
+    }
+}
