@@ -6,7 +6,6 @@ const fragment = document.createDocumentFragment();
 const loader = document.getElementById('loader');
 const header = document.getElementById('header');
 const main = document.querySelector('#main');
-//los divs los capturo para poder borrar o mostrar los filtros
 const divCategoriesFilter = document.querySelector('#filter-container');
 const filterCategoriesInput = document.querySelector('#filterCategoriesInput');
 const divBooksFilter = document.querySelector('#filterBooks-container');
@@ -15,19 +14,15 @@ const ShowOnly = document.querySelector('#showOnly');
 const oldest = document.querySelector('#oldest');
 const newest = document.querySelector('#newest');
 const show5 = document.querySelector('#show5');
-//este es el unico botón a capturar para mostrarlo o borrarlo, los eventos capturan el resto de botones por su id
 const backButton = document.querySelector('#backButton');
 let datalist = document.querySelector('#datalist');
 let datalist2 = document.querySelector('#datalist2');
-//hay que declararlas en global para asignarle los valores en la llamada a la api
-//y que los filtros recojan esos valores y así no salga el portátil volando por la ventana
 let lists = [];
 let filteredLists = [];
 let booklist = [];
 let listName = '';
 let arrayCategoriesSuggestions = [];
 let arrayBookSuggestions = [];
-//páginación
 let currentPage = 0;
 let pages = [];
 const nextButton = document.createElement('button');
@@ -275,12 +270,6 @@ const sortBooksByAlphabet = (order) => {
     printBooklist(sortedList, listName);
 };
 
-// const showFiveBooks = () => {
-//     clear(divList);
-//     const fiveBooks = booklist.slice(0, 5);
-//     printBooklist(fiveBooks, listName);
-// };
-
 //*********************main functions************************************************************************
 
 //---------------------index functions----------------------------------------
@@ -298,7 +287,7 @@ const getCategories = async () => {
             header.style.display = 'block';
             const data = await respuesta.json();
             lists = data.results;
-            filteredLists = [...lists]; //para clonar lists sin alterarla, no estoy seguro de que sea necesario, pero dont try to fix it
+            filteredLists = [...lists];
             printCategories(lists);
             loader.style.display = 'none';
             return lists;
@@ -351,7 +340,7 @@ const getBooklist = async (category) => {
             divList.innerHTML = '';
             const data = await respuesta.json();
             listName = data.results.display_name;
-            booklist = data.results.books; // parece que no es necesario un filteredbooklist, embolia
+            booklist = data.results.books;
             printBooklist(booklist, listName);
             loader.style.display = 'none';
             return booklist;
@@ -394,14 +383,14 @@ const printBooklist = (booklist, listName) => {
     divList.append(fragment);
 };
 
-lists = getCategories() //respuesta asignada a lists para pintar las sugerencias
+lists = getCategories()
     .then(respuesta => {
         console.log(respuesta);
         return respuesta;
     })
     .catch(error => console.error(error))
 
-// si lo descomento da error en consola porque está invocando cuando aun no tiene valores, me lo pongo de sombrero
+
 // getBooklist()
 //     .then(respuesta => console.log(respuesta))
 //     .catch(error => console.error(error))
