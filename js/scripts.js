@@ -333,9 +333,9 @@ const getBooklist = async (category) => {
     backButton.style.display = 'flex';
     divCategoriesFilter.style.display = 'none';
     loader.style.display = 'flex';
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/${category}.json?api-key=fIJzQt26lm7XPd0UdB5iJlFzxefOembt`;
+    const urlcat = `https://api.nytimes.com/svc/books/v3/lists/current/${category}.json?api-key=fIJzQt26lm7XPd0UdB5iJlFzxefOembt`;
     try {
-        const respuesta = await fetch(url);
+        const respuesta = await fetch(urlcat);
         if (respuesta.ok) {
             divList.innerHTML = '';
             const data = await respuesta.json();
