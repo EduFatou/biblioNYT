@@ -148,7 +148,6 @@ header {
 #filterCategoriesInput,
 #filterBooksInput {
     width: 100%;
-    max-width: 400px;
     margin-bottom: 20px;
 }
 
@@ -181,7 +180,7 @@ label {
 .input-group input[type="checkbox"] {
     width: auto;
     height: auto;
-    margin-right: 5px;
+    margin: 20px;
 }
 
 #title {
@@ -268,7 +267,7 @@ hr {
     background-color: #2a2a2a;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     #p1Header {
         font-size: 20px;
     }
@@ -283,13 +282,16 @@ hr {
 @media (max-width: 768px) {
     .filter-container > *:not(#filterCategoriesInput),
     .filterBooks-container > *:not(#filterBooksInput) {
-        width: 100%;
-        max-width: 100%;
+        width: 70%;
+        max-width: 70%;
     }
 
     .input-group {
         flex-direction: row;
         justify-content: flex-start;
+    }
+    label {
+        justify-content: left;
     }
 }
 
