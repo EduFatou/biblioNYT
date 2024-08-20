@@ -25,12 +25,15 @@ let arrayCategoriesSuggestions = [];
 let arrayBookSuggestions = [];
 let currentPage = 0;
 let pages = [];
-const nextButton = document.createElement('button');
-const previousButton = document.createElement('button');
-nextButton.innerHTML = 'Next page';
-previousButton.innerHTML = 'Previous page';
-nextButton.setAttribute('id', 'next');
-previousButton.setAttribute('id', 'previous');
+// const nextButton = document.createElement('button');
+// const previousButton = document.createElement('button');
+// nextButton.innerHTML = 'Next page';
+// previousButton.innerHTML = 'Previous page';
+// nextButton.setAttribute('id', 'next');
+// previousButton.setAttribute('id', 'previous');
+const nextButton = document.querySelector('#nextButton');
+const previousButton = document.querySelector('#previousButton');
+const paginationButtons = document.querySelector('#paginationButtons');
 
 
 //*********************events************************************************************************
@@ -49,6 +52,10 @@ document.addEventListener('click', (evento) => {
     }
     if (evento.target.matches('#backButton')) {
         clear(divList);
+        currentPage = 0;
+        pages = [];
+        show5.checked = false;
+        paginationButtons.style.display = 'none';
         divCategoriesFilter.style.display = 'block';
         divBooksFilter.style.display = 'none';
         backButton.style.display = 'none';
@@ -60,7 +67,7 @@ document.addEventListener('click', (evento) => {
     }
     if (evento.target.matches('#filterButton'))
         searchByCategory();
-        
+
     if (evento.target.matches('#sortByAZ'))
         sortByAlphabet('AZ');
 
@@ -153,12 +160,16 @@ filterBooksInput.onkeyup = (ev) => {
 
 show5.addEventListener('change', (evento) => {
     if (evento.target.checked) {
+        pages = [];
         for (let i = 0; i < booklist.length; i += 5) {
             pages.push(booklist.slice(i, i + 5));
         }
-        header.append(nextButton, previousButton);
+        paginationButtons.style.display = 'flex';
+        currentPage = 0;
         printBooklist(pages[currentPage], listName);
+        updateButtonStates();
     } else {
+        paginationButtons.style.display = 'none';
         printBooklist(booklist, listName);
     }
 });
@@ -167,6 +178,7 @@ nextButton.addEventListener('click', () => {
     if (currentPage < pages.length - 1) {
         currentPage++;
         printBooklist(pages[currentPage], listName);
+        updateButtonStates();
     }
 });
 
@@ -174,6 +186,7 @@ previousButton.addEventListener('click', () => {
     if (currentPage > 0) {
         currentPage--;
         printBooklist(pages[currentPage], listName);
+        updateButtonStates();
     }
 });
 
@@ -255,7 +268,7 @@ const searchBooks = () => {
     console.log(filteredBooklists)
     clear(divList);
     printBooklist(filteredBooklists, listName);
-    
+
 };
 
 const sortBooksByAlphabet = (order) => {
@@ -269,6 +282,11 @@ const sortBooksByAlphabet = (order) => {
     });
     printBooklist(sortedList, listName);
 };
+
+function updateButtonStates() {
+    previousButton.disabled = currentPage === 0;
+    nextButton.disabled = currentPage === pages.length - 1;
+}
 
 //*********************main functions************************************************************************
 
@@ -329,6 +347,10 @@ const printCategories = (lists) => {
 //---------------------booklist functions----------------------------------------
 
 const getBooklist = async (category) => {
+    currentPage = 0;
+    pages = [];
+    show5.checked = false;
+    paginationButtons.style.display = 'none';
     divBooksFilter.style.display = 'block';
     backButton.style.display = 'flex';
     divCategoriesFilter.style.display = 'none';

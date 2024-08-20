@@ -24,8 +24,6 @@
         </div>
     </div>
     <header id="header">
-        <!-- <h3>New York Times<sub>®</sub></h3>
-        <h1>Best Sellers</h1> -->
         <p id="p1Header">New York Times <sub>®</sub></p>
         <p id="p2Header">Best Sellers</p>
     </header>
@@ -34,8 +32,6 @@
             <input list="datalist" id="filterCategoriesInput" placeholder="Search By Category">
             <datalist id="datalist">    
             </datalist>
-
-            <!-- <button id="filterButton">Search by category</button> -->
             <button id="sortByAZ">Sort from A to Z</button>
             <button id="sortByZA">Sort from Z to A</button>
 
@@ -64,7 +60,6 @@
             <input list="datalist2" id="filterBooksInput" placeholder="Search">
             <datalist id="datalist2">    
             </datalist>
-            <!-- <button id="filterBooksButton">Search</button> -->
 
             <button id="sortBooksByAZ">Sort from A to Z</button>
             <button id="sortBooksByZA">Sort from Z to A</button>
@@ -72,6 +67,10 @@
             <div class="input-group">
                 <label for="show5">Show five books per page</label>
                 <input type="checkbox" id="show5">
+            </div>
+            <div id="paginationButtons" style="display: none; justify-content: center; margin-top: 10px;">
+                <button id="previousButton">Previous page</button>
+                <button id="nextButton">Next page</button>
             </div>
         </div>
     
